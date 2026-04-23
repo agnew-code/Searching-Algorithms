@@ -1,19 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <ctime> // Changed from <chrono> for better compatibility
-
+#include <ctime>
 using namespace std;
 
-// --- Helper for Timing (Using ctime) ---
 void printTime(clock_t start, clock_t end) {
-    // Calculate difference and convert to microseconds
-    // (1,000,000 microseconds in 1 second)
     double duration = (double(end - start) / CLOCKS_PER_SEC) * 1000000;
     cout << "\n[Time Taken: " << duration << " microseconds]" << endl;
 }
 
-// --- 1. Linear Search ---
 int linearSearch(const vector<int>& arr, int target) {
     for (int i = 0; i < (int)arr.size(); i++) {
         if (arr[i] == target) return i;
@@ -21,7 +16,6 @@ int linearSearch(const vector<int>& arr, int target) {
     return -1;
 }
 
-// --- 2. Binary Search ---
 int binarySearch(vector<int> arr, int target) {
     sort(arr.begin(), arr.end());
     int low = 0, high = (int)arr.size() - 1;
@@ -34,10 +28,8 @@ int binarySearch(vector<int> arr, int target) {
     return -1;
 }
 
-// --- 3. Hashing (Modulo Method) ---
 int hashSearch(const vector<int>& arr, int target, int tableSize) {
     vector<int> hashTable(tableSize, -1);
-    // Standard for loop used instead of range-based for compatibility
     for (int i = 0; i < (int)arr.size(); i++) {
         int x = arr[i];
         int index = x % tableSize;
@@ -67,7 +59,6 @@ int main() {
         if (choice == 4) break;
         cout << "Enter target: "; cin >> target;
 
-        // Use clock_t instead of steady_clock
         clock_t start = clock();
         int res = -1;
 
